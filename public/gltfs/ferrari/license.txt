@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ferrari 488 pista
+* source:	https://sketchfab.com/3d-models/ferrari-488-pista-e032fae69b404871acbd7213b83282e8
+* author:	louweeeeee___ (https://sketchfab.com/Louweee___)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ferrari 488 pista" (https://sketchfab.com/3d-models/ferrari-488-pista-e032fae69b404871acbd7213b83282e8) by louweeeeee___ (https://sketchfab.com/Louweee___) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

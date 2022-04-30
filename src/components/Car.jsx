@@ -9,17 +9,18 @@ export default function Car(props) {
   
   
   useMemo(() => {
-    console.log(nodes);
+    // console.log(nodes);
     Object.values(nodes).forEach((node) => {
       
     });
     
     Object.values(nodes).forEach((node) => {
       if (node.isMesh) {
-        console.log(node.material.name);
+        // console.log(node.material.name);
         node.receiveShadow = node.castShadow = true
+        // console.log(node.receiveShadow, node.castShadow)
         applyProps(materials.rubber, { color: '#222', roughness: 0.6, roughnessMap: null, normalScale: [4, 4] })
-        // applyProps(materials.window, { color: '#fff', roughness: 0, clearcoat: 0.1 })
+        applyProps(materials.window, { color: '#000', roughness: 0.3, clearcoat: 0 })
         applyProps(materials.coat, { envMapIntensity: 4, roughness: 0.5, metalness: 1 })
         applyProps(materials.paint, { roughness: 0.5, metalness: 0.8, color: '#6c9fce', envMapIntensity: 2 })
         // applyProps(materials.plastic, { roughness: 0.5, metalness: 0.8, color: '#424d59', envMapIntensity: 2 })
