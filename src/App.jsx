@@ -12,6 +12,28 @@ import Model from './components/Model';
 import Car from './components/Car';
 import Loader from './components/Loader';
 
+function MoveCamera(props) {
+
+  useFrame((state) => {
+    
+    if (state.camera.zoom < 1) {
+      if (state.camera.zoom > 0.78) {
+        if (state.camera.zoom > 0.9) {
+          state.camera.zoom += 0.0005
+        }else {
+          state.camera.zoom += 0.001
+        }
+        
+      } else {
+        state.camera.zoom += 0.002
+      }
+      
+      state.camera.updateProjectionMatrix()
+      state.controls.update()
+    } 
+  })
+}
+
 let App = () => {
     // function Camera(props) {
   //   const ref = useRef()
@@ -19,19 +41,10 @@ let App = () => {
   //   // ref.updateProjectionMatrix()
   //   return <perspectiveCamera ref={ref} {...props} />
   // }
-
-  function MoveCamera(props) {
-
-    useFrame((state) => {
-      state.camera.zoom += 0.001
-      
-    })
-    // return null
-  }
   
   return (
     <Canvas>
-      <PerspectiveCamera makeDefault position={[0, 1.2, 12]} fov={30} zoom={0.1} />
+      <PerspectiveCamera makeDefault position={[0, 1.2, 12]} fov={30} zoom={0.01} />
       {/* <Camera makeDefault position={[0, 1.2, 12]} fov={30} zoom={0.1} /> */}
       <Suspense fallback={null}>
         <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} />
@@ -39,8 +52,9 @@ let App = () => {
 
         <Car scale={1} position={[0, 0, 0]} rotation={[0, Math.PI / 5, 0]}/>
         
-        <OrbitControls enablePan enableZoom enableRotate maxPolarAngle={Math.PI / 2.1} /> 
+        <OrbitControls makeDefault enablePan enableZoom enableRotate maxPolarAngle={Math.PI / 2.1} /> 
         {/*  minPolarAngle={Math.PI / 4.25} autoRotate autoRotateSpeed={1}  */}
+        <MoveCamera />
       </Suspense>
 
       <Environment background near={1} far={10} resolution={256}>
@@ -58,7 +72,7 @@ let App = () => {
         </LayerMaterial>
       </mesh>
       
-      <MoveCamera />
+      
     </Canvas>
   );
 }
