@@ -15,51 +15,33 @@ import Loader from './components/Loader';
 function MoveCamera(props) {
 
   useFrame((state) => {
-    
-    if (state.camera.zoom < 1) {
-      if (state.camera.zoom > 0.78) {
-        if (state.camera.zoom > 0.9) {
-          state.camera.zoom += 0.0005
-        }else {
-          state.camera.zoom += 0.001
-        }
-        
-      } else {
-        state.camera.zoom += 0.002
-      }
-      
-      state.camera.updateProjectionMatrix()
-      state.controls.update()
-    } 
+    state.camera.lookAt(0.22, 0, 0)
+
+    const vec = new THREE.Vector3();
+    let time = state.clock.elapsedTime
+    state.camera.position.lerp(vec.set(Math.sin(time / 2.5) + 0.6, 0.1, 15 + Math.cos(time / 2.5)), 0.1)
+
   })
 }
 
 let App = () => {
-    // function Camera(props) {
-  //   const ref = useRef()
-  //   console.log(ref)
-  //   // ref.updateProjectionMatrix()
-  //   return <perspectiveCamera ref={ref} {...props} />
-  // }
   
   return (
     <Canvas>
-      <PerspectiveCamera makeDefault position={[0, 1.2, 12]} fov={30} zoom={0.01} />
-      {/* <Camera makeDefault position={[0, 1.2, 12]} fov={30} zoom={0.1} /> */}
+      <PerspectiveCamera makeDefault position={[1, 0.1, 15]} fov={30} zoom={1.6} />
       <Suspense fallback={null}>
         <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} />
         <ambientLight intensity={0.2} />
 
         <Car scale={1} position={[0, 0, 0]} rotation={[0, Math.PI / 5, 0]}/>
         
-        <OrbitControls makeDefault enablePan enableZoom enableRotate maxPolarAngle={Math.PI / 2.1} /> 
-        {/*  minPolarAngle={Math.PI / 4.25} autoRotate autoRotateSpeed={1}  */}
+        {/* <OrbitControls makeDefault enablePan enableZoom enableRotate maxPolarAngle={Math.PI / 2.1} />  */}
         <MoveCamera />
       </Suspense>
 
-      <Environment background near={1} far={10} resolution={256}>
+      <Environment background near={1} far={300} resolution={256}>
         <mesh scale={10}>
-          <sphereGeometry args={[1, 32, 32]} />
+          <sphereGeometry args={[1, 128, 128]} />
           <meshBasicMaterial side={THREE.BackSide} color="silver" />
         </mesh>
       </Environment>
@@ -67,7 +49,7 @@ let App = () => {
       <mesh scale={100}>
         <sphereGeometry args={[1, 64, 64]} />
         <LayerMaterial side={THREE.BackSide} >
-          <Gradient colorA="#004e92" colorB="#000428" alpha={1}    />
+          <Gradient colorA="#1F41E9" colorB="#1E41EB" alpha={1.0}    />
           
         </LayerMaterial>
       </mesh>
